@@ -11,14 +11,14 @@ The project is built using,
 
 * Ansible
 
-### Getting Started
+## Getting Started
 
-#### Prerequisites
+### Prerequisites
 
 * Create a free tier AWS account.
 * Create an IAM user with programmable access and make a note of the access and secret keys.
 
-### Installation
+## Installation
 
 Clone the repo
 1. git clone https://github.com/Yuvaraj421/media-wiki.git
