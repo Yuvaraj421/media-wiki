@@ -6,7 +6,9 @@
 The project is built using,
 
 ` AWS resources
+
 ` Terraform
+
 ` Ansible
 
 ### Getting Started
