@@ -5,11 +5,11 @@
 
 The project is built using,
 
-` AWS resources
+* AWS resources
 
-` Terraform
+* Terraform
 
-` Ansible
+* Ansible
 
 ### Getting Started
 
