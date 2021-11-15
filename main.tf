@@ -128,11 +128,11 @@ resource "aws_instance" "mediawiki" {
       host = self.public_ip
       type = "ssh"
       user = "ec2-user"
-      private_key = file("./Ansible/secrets/ssh.private")
+      private_key = file("./ssh.private")
     }
   }
   provisioner "local-exec" {
-  command = "ansible-playbook  -i '${aws_instance.mediawiki.public_ip},' --private-key './Ansible/secrets/ssh.private' ./app.yaml"
+  command = "ansible-playbook  -i '${aws_instance.mediawiki.public_ip},' --private-key './ssh.private' ./app.yaml"
 }
  tags = {
     Name = "Ter"
