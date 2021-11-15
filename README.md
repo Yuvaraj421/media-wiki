@@ -27,7 +27,10 @@ Clone the repo
 
 cd into the infrastructure folder in the cloned repository.
 ###### Run the following commands in order
+
  terraform init
+ 
  terraform plan
+ 
  terraform apply
 
