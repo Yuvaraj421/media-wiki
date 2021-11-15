@@ -27,11 +27,12 @@ Clone the repo
 
 # Usage
 
-#### Standing up the Infrastructure and Installing the application
-##### The infrastructure is setup in AWS using Terraform.
+Standing up the Infrastructure and Installing the application
+The infrastructure is setup in AWS using Terraform.
 
 cd into the infrastructure folder in the cloned repository.
-###### Run the following commands in order
+
+Run the following commands in order
 
 * terraform init
  
