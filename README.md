@@ -1,9 +1,9 @@
 # Mediawiki application
 
 Table of contents
-1. #### About The Project
-2. #### Getting Started
-3. #### Usage
+1. ### About The Project
+2. ### Getting Started
+3. ### Usage
 
 ## About The Project
 ### This project is built to host a PHP application in AWS EC2 instance.
