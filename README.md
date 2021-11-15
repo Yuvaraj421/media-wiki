@@ -17,8 +17,8 @@
 
 Clone the repo
 1. git clone 
-2. ![Install Terraform](https://www.terraform.io/downloads.html)
-3. ![Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+2. [Install Terraform](https://www.terraform.io/downloads.html)
+3. [Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 
 # Usage
 
