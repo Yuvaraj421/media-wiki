@@ -1,0 +1,145 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+
+    - name: Install package
+      yum:
+        name: '{{item}}'
+        state: latest
+      with_items:
+        - yum-utils
+
+
+    - name: Install the nginx rpm from a remote repo
+      yum:
+        name: '{{item}}'
+        state: present
+      with_items:
+        - https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        - https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+        
+    - name: Install php
+      yum:
+        name: '{{item}}'
+        state: latest
+        enablerepo: "remi"
+      with_items:
+        - php74-php
+        - php74-php-common
+        - php74-php-cli
+        - php74-php-intl
+        - php74-php-gd
+        - php74-php-curl
+        - php74-php-mysql
+        - php74-php-fpm
+        - php74-php-mbstring
+        - php74-php-json
+        - php74-php-xml
+
+    - name: Install httpd
+      yum:
+        name: httpd
+        state: latest
+    
+    
+        
+    - name: python
+      yum:
+        name: python3
+        state: latest
+
+    - name: Enable php-fpm
+      service: name=php74-php-fpm enabled=yes
+      become: yes
+    
+    - name: start php-fpm
+      service:
+        name: php74-php-fpm
+        state: started
+    - name: install pip
+      yum:
+        name: '{{item}}'
+        state: latest
+      with_items:
+        - pip
+          
+    - name: install pip
+      pip:
+        name: PyMySQL
+      
+
+    - name: Enable mariadb for amazon linux 2
+      shell: "amazon-linux-extras enable mariadb10.5"
+      become: yes
+
+    - name: Install mariadb
+      yum:
+        name: mariadb
+        state: latest
+
+    - name: start mariadb
+      shell: "systemctl start mariadb"
+      become: yes
+
+    - name: enable mariadb service
+      shell: "systemctl enable mariadb"
+      become: yes
+
+    - name: Recreate database
+      shell:
+        cmd: |
+          mariadb <<EOF
+          DROP USER IF EXISTS wiki;
+          DROP DATABASE IF EXISTS wikidatabase;
+          CREATE DATABASE wikidatabase;
+          CREATE USER wiki@localhost IDENTIFIED BY 'THISpasswordSHOULDbeCHANGED';
+          GRANT ALL PRIVILEGES ON wikidatabase.* TO wiki@localhost;
+          EOF
+
+    - name: Enable httpd
+      service: name=httpd enabled=yes
+      become: yes
+        
+    - name: Download mediawiki using get_url
+      get_url: 
+        url: https://releases.wikimedia.org/mediawiki/1.36/mediawiki-1.36.2.tar.gz
+        dest: /home/ec2-user
+        mode: 0777
+
+    - name: unpack build package
+      args:
+        chdir: /var/www/
+      shell: "tar -zxf /home/ec2-user/mediawiki-1.36.2.tar.gz"
+    
+    - name: creating symlink
+      command: ln -s mediawiki-1.36.2/ mediawiki
+
+    - name: Change file permission
+      file:
+        path: /var/www/mediawiki-1.36.2/
+        owner: "apache"
+        group: "apache"
+        state: directory 
+          
+    
+    - name: Change file permission
+      file:
+        path: /var/www/mediawiki/
+        owner: "apache"
+        group: "apache"
+        state: directory 
+
+    - name: Ensure php extension matches new pattern
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        search_string: ' DocumentRoot "/var/www/html" '
+        line: ' DocumentRoot "/var/www/mediawiki-1.36.2/" '
+
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted    
+    
