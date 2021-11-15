@@ -14,8 +14,9 @@ The project is built using,
 ### Getting Started
 
 #### Prerequisites
-##### Create a free tier AWS account.
-###### Create an IAM user with programmable access and make a note of the access and secret keys.
+
+* Create a free tier AWS account.
+* Create an IAM user with programmable access and make a note of the access and secret keys.
 
 ### Installation
 
@@ -32,9 +33,9 @@ Clone the repo
 cd into the infrastructure folder in the cloned repository.
 ###### Run the following commands in order
 
- terraform init
+* terraform init
  
- terraform plan
+* terraform plan
  
- terraform apply
+* terraform apply
 
