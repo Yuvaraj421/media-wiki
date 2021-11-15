@@ -4,7 +4,7 @@
 # Built With
 #### The project is built using,
 
-##AWS resources
+## AWS resources
 ## Terraform
 ## Ansible
 ### Getting Started
@@ -27,8 +27,7 @@ Clone the repo
 
 ##### cd into the infrastructure folder in the cloned repository.
 ###### Run the following commands in order
-terraform init
-terraform plan
-terraform apply
-##### This will provision the required infrastructure and provides the EC2 instance public IP as the output.
+### terraform init
+### terraform plan
+### terraform apply
 
