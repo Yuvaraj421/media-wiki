@@ -13,7 +13,7 @@
         - yum-utils
 
 
-    - name: Install the nginx rpm from a remote repo
+    - name: Install the rpm from a remote repo
       yum:
         name: '{{item}}'
         state: present
